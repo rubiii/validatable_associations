@@ -35,25 +35,22 @@ decent validatable structure.
     validates_numericality_of :size
   end
 
-Now calling the valid? method provided by the Validatable library will also run the
-validations for every associated validatable class.
-
 === Implemented association types:
 
 The first version of this add-on only includes has_one associations.
 I intend to only add more associations if I need them myself or if anyone convinces
 me that he really needs support for another type of association.
 
+== Validation
+
+Calling the valid? method (provided by the Validatable library) on an instance of
+one of your validatable Classes will also run the validations for all associations
+of the Class.
+
 == Mass-assignment
 
-You can use mass-assignment to assign multiple values to your class at once.
-This also includes each association.
+You can use mass-assignment to assign multiple values to your Class at once.
+This also includes every one of its associations.
 
   user = User.new :username => "apricot", :password => "secret",
     :gorilla => { :name => "Joe", :size => 4411 }
-
-== Validation
-
-Call the valid? method to validate your class and all associations.
-
-  user.valid?
