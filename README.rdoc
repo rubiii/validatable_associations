@@ -44,7 +44,7 @@ me that he really needs support for another type of association.
 == Validation
 
 Calling the valid? method (provided by the Validatable library) on an instance of
-one of your validatable Classes will also run the validations for all associations
+one of your validatable Classes will also run the validations off all associations
 of the Class.
 
 == Mass-assignment
