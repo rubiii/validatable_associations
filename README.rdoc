@@ -11,7 +11,7 @@ decent validatable structure.
 
 == Associations
 
-A very simple example
+A very simple example of a "User has one Gorilla" association:
 
   class User
     include Validatable
