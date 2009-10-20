@@ -1,9 +1,58 @@
 = ValidatableAssociations
 
-ValidatableAssociations is an add-on to the Validatable gem by Jay Fields.
-It adds the most common association methods provided by Rails to your
+ValidatableAssociations is an add-on to the {Validatable}[http://validatable.rubyforge.org]
+gem by Jay Fields. It adds the most common association methods provided by Rails to your
 validatable Class and allows to set up a decent validatable structure.
 
 == Install
 
   $ script/plugin install git://github.com/rubiii/validatable_associations.git
+
+== Associations
+
+=== A very simple example
+
+  class User
+    include Validatable
+    include ValidatableAssociations
+
+    has_one :gorilla
+
+    attr_accessor :username, :password
+
+    validates_presence_of :username
+    validates_length_of :password, :minimum => 6
+  end
+
+  class Gorilla
+    include Validatable
+    include ValidatableAssociations
+
+    attr_accessor :name, :size
+
+    validates_presence_of :name
+    validates_numericality_of :size
+  end
+
+Now calling the valid? method provided by the Validatable library will also run the
+validations for every associated validatable class.
+
+=== Implemented association types:
+
+This first version of the add-on only includes has_one associations.
+And I intend to only add more associations if I need them myself or if anyone convinces
+me that he really needs any other type of association.
+
+== Mass-assignment
+
+You can use mass-assignment to assign multiple values at once to your class and any
+one of its associations.
+
+  user = User.new :username => "apricot", :password => "secret",
+    :gorilla => { :name => "Joe", :size => 4411 }
+
+== Validation
+
+Call the valid? method to validate your class and all associations.
+
+  user.valid?
