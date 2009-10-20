@@ -39,14 +39,14 @@ validations for every associated validatable class.
 
 === Implemented association types:
 
-This first version of the add-on only includes has_one associations.
-And I intend to only add more associations if I need them myself or if anyone convinces
-me that he really needs any other type of association.
+The first version of this add-on only includes has_one associations.
+I intend to only add more associations if I need them myself or if anyone convinces
+me that he really needs support for another type of association.
 
 == Mass-assignment
 
-You can use mass-assignment to assign multiple values at once to your class and any
-one of its associations.
+You can use mass-assignment to assign multiple values to your class at once.
+This also includes each association.
 
   user = User.new :username => "apricot", :password => "secret",
     :gorilla => { :name => "Joe", :size => 4411 }
