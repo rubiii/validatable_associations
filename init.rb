@@ -1,0 +1,1 @@
+require "validatable_associations"
