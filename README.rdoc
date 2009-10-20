@@ -11,7 +11,7 @@ decent validatable structure.
 
 == Associations
 
-=== A very simple example
+A very simple example
 
   class User
     include Validatable
@@ -35,7 +35,7 @@ decent validatable structure.
     validates_numericality_of :size
   end
 
-=== Currently implemented associations:
+==== Currently implemented associations:
 
 The first version of this add-on only includes has_one associations.
 I intend to only add more associations if I need them myself or if anyone convinces
