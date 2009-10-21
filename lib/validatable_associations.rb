@@ -1,8 +1,8 @@
 # == ValidatableAssociations
-# 
-# ValidatableAssociations is an add-on to the Validatable gem by Jay Fields.
-# It adds the most common association methods provided by Rails to your
-# validatable Class and allows to set up a decent validatable structure.
+#
+# ValidatableAssociations is a Rails plugin and add-on to Jay Fields Validatable
+# library. This add-on lets you specify associations to other validatable Classes
+# and allows you to set up a decent validatable structure.
 module ValidatableAssociations
 
   # ValidatableAssociations::ClassMethods

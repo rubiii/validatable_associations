@@ -1,8 +1,8 @@
 = ValidatableAssociations
 
-ValidatableAssociations is an add-on to Jay Fields
+ValidatableAssociations is a Rails plugin and add-on to Jay Fields
 {Validatable}[http://validatable.rubyforge.org] library. This add-on lets you
-specify associations to other validatable classes and allows you to set up a
+specify associations to other validatable Classes and allows you to set up a
 decent validatable structure.
 
 == Install
