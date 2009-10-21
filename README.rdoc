@@ -7,7 +7,17 @@ decent validatable structure.
 
 == Install
 
+Install as a Rails plugin:
+
   $ script/plugin install git://github.com/rubiii/validatable_associations.git
+
+Or install the gem:
+
+  $ gem install validatable_associations
+
+Please notice that the validatable_associations gem is in the
+{gemcutter}[http://gemcutter.org] repository. Please follow the instructions
+provided on their website to set up your rubygems installation.
 
 == Associations
 
