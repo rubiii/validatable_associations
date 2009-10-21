@@ -40,7 +40,7 @@ module ValidatableAssociations
     super unless self.class.has_one.include? association_name
 
     association_to_set = find_or_create_association(association_name, args[0])
-    self.instance_variable_set("@#{association}", association_to_set)
+    self.instance_variable_set("@#{association_name}", association_to_set)
     association_to_set
   rescue NameError
     super
@@ -55,15 +55,21 @@ module ValidatableAssociations
 
 private
 
-  # Assigns a given +value+ to a given +instance_variable+. Tries to use the
-  # writer method for the given iVar and defaults to setting the iVar directly
-  # if no writer method was found.
-  def assign_to(instance_variable, value)
-    if self.methods.include? "#{instance_variable}="
-      self.send("#{instance_variable}=", value)
+  # Assigns a given +value+ to a given +ivar+. Tries to use the writer method
+  # for the given instance variable and defaults to setting it directly in case
+  # no writer method was found.
+  def assign_to(ivar, value)
+    if assign_via_writer? ivar
+      self.send("#{ivar}=", value)
     else
-      self.instance_variable_set("@#{instance_variable}", value)
+      self.instance_variable_set("@#{ivar}", value)
     end
+  end
+
+  # Checks whether a given +ivar+ should be assigned via an existing writer
+  # method or directly.
+  def assign_via_writer?(ivar)
+    self.methods.include?("#{ivar}=") || self.class.has_one.include?(ivar)
   end
 
   # Takes an +association_name+ and returns an existing association matching
@@ -71,10 +77,10 @@ private
   # initialized already or in case of given +arguments+.
   def find_or_create_association(association_name, arguments = nil)
     if arguments
-      to_constant(association).new arguments
+      to_constant(association_name).new arguments
     else
       association = self.instance_variable_get("@#{association_name}")
-      association = to_constant(association_name).new unless association_to_set
+      association = to_constant(association_name).new unless association
       association
     end
   end
@@ -108,3 +114,4 @@ private
   end
 
 end
+
