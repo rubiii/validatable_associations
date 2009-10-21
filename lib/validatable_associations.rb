@@ -7,7 +7,7 @@ module ValidatableAssociations
 
   # ValidatableAssociations::ClassMethods
   #
-  # Includes class methods for setting up the associations.
+  # Includes Class methods for setting up the associations.
   module ClassMethods
 
     # Reader/writer method for has_one associations. Sets 1-n +associations+
@@ -16,7 +16,7 @@ module ValidatableAssociations
     def has_one(*associations)
       @has_one = [] unless @has_one
       return @has_one if associations.empty?
-      @has_one = associations.map { |association| association.to_s }
+      @has_one += associations.map { |association| association.to_s }
     end
 
   end
@@ -36,7 +36,7 @@ module ValidatableAssociations
   # a reader/writer method of an association and handles the read/write process.
   # Delegates to super otherwise.
   def method_missing(method, *args)
-    association_name = to_association_name(method)
+    association_name = association_name_from(method)
     super unless self.class.has_one.include? association_name
 
     association_to_set = find_or_create_association(association_name, args[0])
@@ -77,10 +77,10 @@ private
   # initialized already or in case of given +arguments+.
   def find_or_create_association(association_name, arguments = nil)
     if arguments
-      to_constant(association_name).new arguments
+      constant_from(association_name).new arguments
     else
       association = self.instance_variable_get("@#{association_name}")
-      association = to_constant(association_name).new unless association
+      association = constant_from(association_name).new unless association
       association
     end
   end
@@ -100,7 +100,7 @@ private
 
   # Expects the name of a reader/writer +method+ and turns it into a valid
   # name for an association.
-  def to_association_name(method)
+  def association_name_from(method)
     association_name = method.to_s
     association_name.slice!(-1) if association_name[-1, 1] == "="
     association_name
@@ -109,7 +109,7 @@ private
   # Converts a given +symbol+ from snake_case into an existing Constant.
   # Note that the constanize method might raise a NameError in case the given
   # symbol could not be mapped to a Constant.
-  def to_constant(symbol)
+  def constant_from(symbol)
     symbol.to_s.camelize.constantize
   end
 
