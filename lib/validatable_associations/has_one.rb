@@ -4,7 +4,7 @@ module ValidatableAssociations
 	  module ClassMethods
 
 		  # Reader/writer method for has_one associations. Sets 1-n +associations+
-		  # or defaults to return all previously specified associations if no
+		  # or defaults to returning all previously specified associations if no
 		  # parameters were given.
 		  def has_one(*associations)
 		    @has_one = [] unless @has_one

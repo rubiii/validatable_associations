@@ -3,6 +3,7 @@ module ValidatableAssociations
 
     private
 
+      # Returns whether a given +method_name+ matches a confirmation.
       def confirmation?(method_name)
         if method_name[-13, 13] == "_confirmation"
           method = method_name.dup
@@ -14,6 +15,7 @@ module ValidatableAssociations
       	self.public_methods.include? method
       end
 
+      # Handles a call to a confirmation.
       def handle_confirmation(confirmation, argument)
         return self.instance_variable_get("@#{confirmation}") unless argument
         

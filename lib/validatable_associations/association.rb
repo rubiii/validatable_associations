@@ -28,6 +28,7 @@ module ValidatableAssociations
         self.class.has_one.include? method_name
       end
 
+      # Handles a call to an association.
       def handle_association(association_name, argument)
         association_to_set = find_or_create_association(association_name, argument)
         self.instance_variable_set("@#{association_name}", association_to_set)

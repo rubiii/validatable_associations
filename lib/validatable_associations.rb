@@ -20,8 +20,8 @@ module ValidatableAssociations
   end
 
   # Catches calls to undefined methods. Checks if the +method+ called matches
-  # a reader/writer method of an association and handles the read/write process.
-  # Delegates to super otherwise.
+  # an association or a method for validates_confirmation_of. Delegates to super
+  # otherwise.
   def method_missing(method, *args)
     method = clean_method_name(method)
 
@@ -38,8 +38,7 @@ module ValidatableAssociations
 
 private
 
-  # Expects the name of a reader/writer +method+ and turns it into a valid
-  # name for an association.
+  # Removes the writer attribute ("=") from a given +method+.
   def clean_method_name(method)
     name = method.to_s
     name.slice! -1 if name[-1, 1] == "="
