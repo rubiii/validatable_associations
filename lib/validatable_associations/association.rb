@@ -30,8 +30,8 @@ module ValidatableAssociations
 
       # Handles a call to an association.
       def handle_association(association_name, argument)
-        association_to_set = find_or_create_association(association_name, argument)
-        self.instance_variable_set("@#{association_name}", association_to_set)
+        association_to_set = find_or_create_association association_name, argument
+        self.instance_variable_set "@#{association_name}", association_to_set
         association_to_set
       end
 
@@ -42,7 +42,7 @@ module ValidatableAssociations
         if arguments
           constant_from(association_name).new arguments
         else
-          association = self.instance_variable_get("@#{association_name}")
+          association = self.instance_variable_get "@#{association_name}"
           association = constant_from(association_name).new unless association
           association
         end

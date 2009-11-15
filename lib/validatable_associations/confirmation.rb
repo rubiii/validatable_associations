@@ -7,7 +7,7 @@ module ValidatableAssociations
       def confirmation?(method_name)
         if method_name[-13, 13] == "_confirmation"
           method = method_name.dup
-          method.slice!(-13, 13)
+          method.slice! -13, 13
         else
           method = method_name
         end
@@ -17,12 +17,12 @@ module ValidatableAssociations
 
       # Handles a call to a confirmation.
       def handle_confirmation(confirmation, argument)
-        return self.instance_variable_get("@#{confirmation}") unless argument
+        return self.instance_variable_get "@#{confirmation}" unless argument
         
         if self.public_methods.include? "#{confirmation}="
-          self.send("#{confirmation}=", argument)
+          self.send "#{confirmation}=", argument
         else
-          self.instance_variable_set("@#{confirmation}", argument)
+          self.instance_variable_set "@#{confirmation}", argument
         end
         argument
       end
