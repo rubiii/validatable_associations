@@ -51,8 +51,7 @@ describe ValidatableAssociations do
     end
     
     it 'returns an instance of an associated Class' do
-      p ValidatableClass.has_one
-      p @validatableClass.validatable_association
+      @validatableClass.validatable_association.should be_a ValidatableAssociation
     end
   end
 
